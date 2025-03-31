@@ -1,6 +1,7 @@
 import pandas as pd
 import pickle
 from pathlib import Path
+import csv
 
 '''
 Note: I had some help figuring this logic out from a developer friend of mine.
@@ -11,8 +12,7 @@ I also came to the conclusion that the most secure thing was to run this script 
 
 def hash_new_aliases():
     # Read the triage CSV file
-    df = pd.read_excel("../data/sensitive/vestfoldtriage.csv")
-
+    df = pd.read_csv("../data/sensitive/vestfoldtriage.csv", delimiter=";", on_bad_lines='skip', quoting=csv.QUOTE_NONE, low_memory=False, skipinitialspace=True)
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table
     vestfoldtriage_hashed_path = Path("../data/vestfoldtriage_data_hashed.pkl")
 
@@ -22,7 +22,7 @@ def hash_new_aliases():
             vestfoldtriage_hash = pickle.load(triage_data)  # TODO: explain .load method
     else:
         vestfoldtriage_hash = {}
-
+    # TODO: Burde jeg ha en sjekk for å se om alias_ids er tom (try/except)?
     # Initiating a variable 'alias_ids', which is a set of the 'NPR ID' column in the data source, then subtracts already hashed ID's - making a unique list of unhashed ID's.
     alias_ids = set(df['NPR ID']) - vestfoldtriage_hash.keys()
     start_index = len(vestfoldtriage_hash) + 1  # Counter variable in preparation for enumeration below
@@ -35,12 +35,14 @@ def hash_new_aliases():
     with open(vestfoldtriage_hashed_path, "wb") as triage_data:
         pickle.dump(vestfoldtriage_hash, triage_data)
 
-    # Initiatlizing new column, applying update to dataframe
+    # Initializing new column, applying update to dataframe
     df['Alias ID'] = df['NPR ID'].map(vestfoldtriage_hash)
 
     # Dropping (deleting) original ID column in dataframe
-    df = df.drop("NPR ID")
+    df = df.drop("NPR ID", axis=1)
 
     # Save as CSV
-    df.to_csv(vestfoldtriage_hashed_path)
+    df.to_csv("../data/vestfoldtriage_data_hashed.csv", index=False, sep=";")
     print(f"Success! Saved {len(alias_ids)} ID's.")
+
+hash_new_aliases()
