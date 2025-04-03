@@ -42,7 +42,7 @@ def hash_aliases_from_excel():
     df = df.drop('NPR ID', axis=1)
 
     # Save as Excel
-    df.to_excel("../data/vestfoldtriage_data_hashed.xlsx")
+    df.to_excel("../data/vestfoldtriage_data_hashed.xlsx", index=False)
     print(f"Success! Saved {len(new_alias_ids)} ID's.")
 
 # Main guard - A trick my developer friend taught me.. :)
