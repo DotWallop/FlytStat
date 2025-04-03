@@ -1,7 +1,6 @@
 import pandas as pd
 import pickle
 from pathlib import Path
-import csv
 
 '''
 Note: I had some help figuring this logic out from a developer friend of mine.
@@ -12,7 +11,7 @@ I also came to the conclusion that the most secure thing was to run this script 
 
 def hash_new_aliases():
     # Read the triage Excel file
-    df = pd.read_excel("data/sensitive/vestfoldtriage.xlsx", usecols="A:AT")
+    df = pd.read_excel("../data/sensitive/vestfoldtriage.xlsx", usecols="A:AQ")
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table
     vestfoldtriage_hashed_path = Path("../data/vestfoldtriage_data_hashed.pkl")
 
@@ -46,4 +45,6 @@ def hash_new_aliases():
     df.to_excel("../data/vestfoldtriage_data_hashed.xlsx")
     print(f"Success! Saved {len(new_alias_ids)} ID's.")
 
-hash_new_aliases()
+# A trick my developer friend taught me.. :)
+if __name__ == "__main__":
+    hash_new_aliases()
