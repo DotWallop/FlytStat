@@ -9,7 +9,7 @@ I also came to the conclusion that the most secure thing was to run this script 
 '''
 
 
-def hash_new_aliases():
+def hash_aliases_from_excel():
     # Read the triage Excel file
     df = pd.read_excel("../data/sensitive/vestfoldtriage.xlsx", usecols="A:AQ")
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table
@@ -25,7 +25,7 @@ def hash_new_aliases():
     # TODO: Burde jeg ha en sjekk for å se om alias_ids er tom (try/except)?
     # Initiating a variable 'alias_ids', which is a set of the 'NPR ID' column in the data source, then subtracts already hashed ID's - making a unique list of unhashed ID's.
     new_alias_ids = set(df['NPR ID']) - vestfoldtriage_hash.keys()
-    start_index = len(vestfoldtriage_hash) + 1  # Counter variable in preparation for enumeration below, finding first o
+    start_index = len(vestfoldtriage_hash) + 1  # Counter variable in preparation for enumeration below, returning first unhashed index.
 
     # Looping through the 'vestfoldtriage_hash' dictionary, replacing the NPR ID with unique alias, using pad formatting (':05')
     for alias, npr_id in enumerate(new_alias_ids, start=start_index):
@@ -45,6 +45,6 @@ def hash_new_aliases():
     df.to_excel("../data/vestfoldtriage_data_hashed.xlsx")
     print(f"Success! Saved {len(new_alias_ids)} ID's.")
 
-# A trick my developer friend taught me.. :)
+# Main guard - A trick my developer friend taught me.. :)
 if __name__ == "__main__":
-    hash_new_aliases()
+    hash_aliases_from_excel()
