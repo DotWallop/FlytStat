@@ -1,7 +1,4 @@
-from loguru import logger
-from rich.logging import RichHandler
-
-""" 
+"""
 This project utilizes the Rich library for prettifying output and loguru for simpler logging. See readme for more details.
 """
 

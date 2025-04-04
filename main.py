@@ -1,11 +1,11 @@
 # import pandas as pd
 # from plots import *
-import rich_config
 from rich import traceback, print
+from loguru import logger
 
 
 # === INIT ===
-
+traceback.install(show_locals=True)
 
 print("[bold cyan]Velkommen!\n\nVelg ønsket funksjon:[/]")
 # List of function options. 
@@ -31,5 +31,5 @@ match user_choice:
         # Add meta info as an input option, min-max of source date column to see date range, number of patients, etc.
 
     case _:
-        raise keyError(f"{str(user_choice)} is not a valid entry.")
+        raise KeyError(f"{str(user_choice)} is not a valid entry.")
 # Wrap entire pipeline in a while True-loop? Add a "return to main" within the subsections, that clears the terminal if possible?
