@@ -9,11 +9,11 @@ TBA
 ## Progress requirements
 * [ ] Arrays
 * [ ] Vector calculation
-* [ ] If / Else comparators
-* [ ] For- or While-loops
-* [ ] Read and write data to file
+* [x] If / Else comparators
+* [x] For- or While-loops
+* [x] Read and write data to file
 * [ ] Plotting
-* [ ] Custom functions
+* [x] Custom functions
 
 ## Feature summary:
 <details>
