@@ -35,3 +35,25 @@ TBA
   - if-statements
   - for-loops (counter)
 </details>
+<details>
+  <summary>🎨 Styling with Loguru & Rich</summary>
+ 
+## Loguru and Rich
+
+  This project utilizes two CLI styling libraries - [Loguru](https://github.com/Delgan/loguru) and 
+  [Rich](https://rich.readthedocs.io/en/stable/introduction.html).
+
+  A personal goal of mine with this project was to get comfortable implementing libraries in my project,
+  in order to get more acquainted with reading library documentation and best-practice implementations.
+---
+  - **Rich** is an incredible collection of CLI styling tools.
+  - **Loguru** is a improved logger requiring no boilerplate configuration. Makes debugging a lot simpler.
+
+  ---
+  ## Code style
+  [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
+  
+I have utilized [Pylint](https://pypi.org/project/pylint/) in order to get feedback on code structure, PEP8 conformity etc. 
+  
+</details>
+

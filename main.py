@@ -1,14 +1,19 @@
-import pandas as pd
-from plots import *
+# import pandas as pd
+# from plots import *
+import rich_config
+from rich import traceback, print
 
 
-print("Velkommen!\nVelg ønsket funksjon:")
+# === INIT ===
+
+
+print("[bold cyan]Velkommen!\n\nVelg ønsket funksjon:[/]")
 # List of function options. 
 input_options = ("Søk opp statistikk", "Vis datagrunnlag")
 
-# Indexes 'input_options' list using the enumerate function, starting at 1 to make the positions 1-based. "\033[1m" in print statement outputs bold text.
+# Indexes 'input_options' list using the enumerate function, starting at 1 to make the positions 1-based.
 for index, value in enumerate(input_options, start=1):
-    print(f"\033[1m{index}:\033[1m  {value}")
+    print(f"{index}:  {value}")
 
 print()
 print()
