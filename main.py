@@ -1,7 +1,5 @@
 # import pandas as pd
 # from plots import *
-from rich import traceback, print
-from loguru import logger
 
 
 # === INIT ===
