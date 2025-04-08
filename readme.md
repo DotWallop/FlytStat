@@ -36,24 +36,16 @@ TBA
   - for-loops (counter)
 </details>
 <details>
-  <summary>🎨 Styling with Loguru & Rich</summary>
- 
-## Loguru and Rich
-
-  This project utilizes two CLI styling libraries - [Loguru](https://github.com/Delgan/loguru) and 
-  [Rich](https://rich.readthedocs.io/en/stable/introduction.html).
-
-  A personal goal of mine with this project was to get comfortable implementing libraries in my project,
-  in order to get more acquainted with reading library documentation and best-practice implementations.
----
-  - **Rich** is an incredible collection of CLI styling tools.
-  - **Loguru** is a improved logger requiring no boilerplate configuration. Makes debugging a lot simpler.
-
-  ---
-  ## Code style
-  [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
+  <summary>📝 CSV vs. Xlsx</summary>
   
-I have utilized [Pylint](https://pypi.org/project/pylint/) in order to get feedback on code structure, PEP8 conformity etc. 
+  The data source was retrieved from a CSV file. The CSV file alone is around 5 Mb comprised of over 30,000 lines, all in which have over 40 values to them.
+  I quickly found out that parsing a file this big brought many problems; file integrity, parsing, binary stream issues due to memory constraints etc.
+
+  In reality, I would likely been able to get around this with research and just a touch of AI assistance (though, the results I tried using both OpenAI and Claude only rendered useless responses despite good prompting),
+  but I made a decision to rather convert this to an .xlsx file - in order to keep the scope of the project within confines.
   
+  For a file this large, I would for a production project always have gone with a CSV file (or in reality, a database, even a lightweight one like SQLite) to give better options.
+  I have some experience with SQLite, but as that is outside the scope of PY1010, I chose not to include it.
+
 </details>
 
