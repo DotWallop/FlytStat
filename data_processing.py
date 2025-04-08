@@ -23,13 +23,13 @@ def insert_triage_col(old_col):
         return False
 
     print(f"Mapping '{old_col}'.\n This might take some time ...")  # Console print
-
     # Mapping old_col string values to urgency_level int counterpart, inserts col right of old original col
     new_col_index = df.columns.get_loc(old_col) + 1  # TODO: Test get_loc
     mapped_urgency_values = df[old_col].map(urgency_level)
     df.insert(new_col_index, new_col_name, mapped_urgency_values)
 
     print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
+
 
 # Check if spreadsheet exists, if so, load it into a Pandas dataframe
 if not sheet_path.exists():
@@ -48,6 +48,11 @@ insert_triage_col('Resultat av første pretriage')
 insert_triage_col('Resultat av første legerespons')
 insert_triage_col('Resultat av første triage')
 insert_triage_col('Klinisk bekymring i første triage')
+
+# Applying Pandas' .to_datetime function to all datetime-columns
+datetime_columns = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
+df[datetime_columns] = df[datetime_columns].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
+
 
 # Outputs modified file to the excel file
 try:
