@@ -2,6 +2,8 @@
 This file handles the data processing necessary for the plots to function.
 It expects a hashed xlsx file, so run npr_hashing.py first.
 """
+from metrics import urgency_level
+
 import pandas as pd
 from pathlib import Path
 
@@ -35,12 +37,6 @@ if not sheet_path.exists():
     raise FileNotFoundError(f"Kan ikke finne angitt fil: {sheet_path.resolve()}!\nHar du kjørt 'npr_hashing.py'?")
 else:
     df = pd.read_excel(sheet_path)
-
-urgency_level = { "NotUrgent": 1,
-                  "LessUrgent": 2,
-                  "Urgent": 3,
-                  "Resuscitation": 4
-                  }
 
 # Mapping string keys to their respective int value to enable comparison
 insert_triage_col('Resultat av første pretriage')
