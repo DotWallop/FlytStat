@@ -10,7 +10,6 @@ sheet_path = Path('data/vestfoldtriage_data_hashed.xlsx')
 
 def insert_triage_col(old_col):
     """Creates and inserts parsed triage column to the right of the original column"""
-
     new_col_name = f"converted_{old_col[0:20].replace(" ", "_")}"  # Generates shortened, code-friendly name
 
     # Handling most common errors
@@ -50,8 +49,9 @@ insert_triage_col('Resultat av første triage')
 insert_triage_col('Klinisk bekymring i første triage')
 
 # Applying Pandas' .to_datetime function to all datetime-columns
-datetime_columns = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
-df[datetime_columns] = df[datetime_columns].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
+DATETIME_COLUMNS = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
+df[DATETIME_COLUMNS] = df[DATETIME_COLUMNS].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
+
 
 
 # Outputs modified file to the excel file
