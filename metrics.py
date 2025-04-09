@@ -1,50 +1,17 @@
 """
 This file handles most of the metrics in the application - variable setting and user input functions.
 """
-from common import get_date_info, URGENCY_LEVELS
+from common import URGENCY_LEVELS
+from data_processing import df
 import re
 import pandas as pd
-import numpy as np
-
-# -- DYNAMIC VALUES -- #
-
-def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
-    patient_stats = {}
-
-    if datetime_prop == 'hour':
-        for hour in range(24):
-            hourly_stats = {}
-            for level in URGENCY_LEVELS:
-                counter = df.loc[
-                    (df['Resultat av første triage'] == level)
-                    & (df['Ankomst'].dt.date == date.date())
-                    & (df['Ankomst'].dt.hour == hour)
-                ]
-                hourly_stats[level] = len(counter)
-            patient_stats[hour] = hourly_stats
-        return patient_stats
-
-    else:
-        for level in URGENCY_LEVELS:
-            counter = df.loc[
-                (df['Resultat av første triage'] == level)
-                & (df['Ankomst'].dt.date == date.date())
-            ]
-            patient_stats[level] = len(counter)
-        return patient_stats
-
-def dict_to_np_array(dict):
-    for key in dict:
-        key
-
-
-# -- USER INPUTS -- #
 
 def user_date_prompt_to_timestamp() -> pd.Timestamp:
     """
     A top-level, nested function that prompts the user to input a month and date for data visualization.
     get_valid_month_day() -- Runs the input flow and validates it with simple RegEx, outputs month_input, day_input
     get_year_from_month_and_day() -- Calculates the year based on month and day input
+    :returns: pd.Timestamp from user prompt
     """
     def get_valid_month_day() -> tuple[int, int]:
         """ Runs user prompt and validates to regex pattern """
@@ -77,7 +44,7 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
             break  # Wrapper
         return month_input, day_input
 
-    def get_year_from_month_and_day(month_input, day_input) -> int:
+    def get_year_from_month_and_day(month_input=11, day_input=28) -> int:  #  Default placeholders for testing TODO: Remove placeholders
         """Dataset is from 2024-03-10 to 2025-03-09. Year will be calculated accordingly"""
 
         if month_input > 3:
@@ -93,5 +60,32 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
     year = get_year_from_month_and_day(month, day)
 
     timestamp = pd.Timestamp(f"{year}-{month}-{day}")
+    print(f"Dato valgt:  {timestamp.strftime('%d. %B %Y')}")  # Console confirmation output
     return timestamp
+
+
+def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
+    patient_stats = {}
+
+    if datetime_prop == 'hour':
+        for hour in range(24):
+            hourly_stats = {}
+            for level in URGENCY_LEVELS:
+                counter = df.loc[
+                    (df['Resultat av første triage'] == level)
+                    & (df['Ankomst'].dt.date == date.date())
+                    & (df['Ankomst'].dt.hour == hour)
+                ]
+                hourly_stats[level] = len(counter)
+            patient_stats[hour] = hourly_stats
+        return patient_stats
+
+    else:
+        for level in URGENCY_LEVELS:
+            counter = df.loc[
+                (df['Resultat av første triage'] == level)
+                & (df['Ankomst'].dt.date == date.date())
+            ]
+            patient_stats[level] = len(counter)
+        return patient_stats
 
