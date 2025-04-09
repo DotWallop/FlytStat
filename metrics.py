@@ -4,10 +4,7 @@ This file handles most of the metrics in the application - variable setting and 
 from common import get_date_info, URGENCY_LEVELS
 import re
 import pandas as pd
-
-
-
-
+import numpy as np
 
 # -- DYNAMIC VALUES -- #
 
@@ -21,6 +18,14 @@ def get_triage_stats_per_day(date) -> dict:  # TODO: Create tests? Pytest
         ]
         patient_stats[level] = len(counter)
     return patient_stats
+
+def dict_to_np_array(dict):
+    for key in dict:
+        key
+
+def triage_stats_per_hour(date) -> dict:
+    pass
+
 
 # -- USER INPUTS -- #
 
