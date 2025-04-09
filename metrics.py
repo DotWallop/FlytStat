@@ -1,7 +1,7 @@
 """
 This file handles most of the metrics in the application - variable setting and user input functions.
 """
-from common import get_date_info
+from common import get_date_info, URGENCY_LEVELS
 import re
 import pandas as pd
 
@@ -11,10 +11,16 @@ import pandas as pd
 
 # -- DYNAMIC VALUES -- #
 
-def get_triage_stats_per_day(): # TODO: Create tests? Pytest
-    daily_patients_noturgent = df.loc[(df['Resultat av første triage'] == 'NotUrgent') & (df['Ankomst'].dt.date == )] # TODO: UNFINISHED
+def get_triage_stats_per_day(date) -> dict:  # TODO: Create tests? Pytest
+    patient_stats = {}
 
-
+    for level in URGENCY_LEVELS:
+        counter = df.loc[
+            (df['Resultat av første triage'] == level)
+            & (df['Ankomst'].dt.date == date.date())
+        ]
+        patient_stats[level] = len(counter)
+    return patient_stats
 
 # -- USER INPUTS -- #
 
