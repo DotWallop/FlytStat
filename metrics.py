@@ -21,42 +21,53 @@ urgency_level = { "NotUrgent": 1,
                   }
 
 # -- DYNAMIC VALUES -- #
+month_input, day_input = month_day_input()
+month_input = 0  # Init
+day_input = 0  # Init
 
-def get_triage_stats_per_day():
+# def user_datemonth_input_to_datetime(day, month)
+#     """Dataset is from 2024-03-10 to 2025-03-09. Year will be calculated accordingly"""
+#
+#     if month > 03
 
+
+# def get_triage_stats_per_day(): # TODO: Create tests? Pytest
+#     daily_patients_noturgent = df.loc[(df['Resultat av første triage'] == 'NotUrgent') & (df['Ankomst'].dt.date == )]
 
 
 
 # -- USER INPUTS -- #
-month_input = 0
-day_input = 0
-def month_date_input():
 
-    while True:  # Month and date wrapper
+def month_day_input():
+    while True:  # Month and day wrapper
         while True:  # Month
             print("Velg  ønsket måned (MM):\nEksempel: '03' for Mars.")
             _user_month_input = input("Måned: ")
 
             # RegEx match statement. Self-made pattern, passed all my tests, so should be good.
-            _user_month_input = re.search(r"(0[1-9]|1[0-2])",_user_month_input)
+            regex_match = re.search(r"(0[1-9]|1[0-2])",_user_month_input)
 
-            if _user_month_input is None:
+            if regex_match is None:
                 print("Feil inntasting. Måned må være to siffer, og gyldig måned.\n")
                 continue
+            month_input = int(regex_match.group())  # Extracts only matched string, converts to INT => Removes leading zeros
             break  # Month
 
         while True:  # Day
             print("Velg ønsket dato (DD):\nEksempel: '18' for den attende i måneden.")
-            _user_date_input = input("Dato: ")
+            _user_day_input = input("Dato: ")
 
             # No 30-31 validation as I did not find a reasonable way of doing this.
-            _user_date_input = re.search(r"(0[1-9]|[1-2][0-9]|3[0-1])",_user_date_input)
+            regex_match = re.search(r"(0[1-9]|[1-2][0-9]|3[0-1])",_user_day_input)
 
-            if _user_date_input is None:
+            if regex_match is None:
                 print("Feil inntasting. Måned må være to siffer, og en gyldig dato.\n")
                 continue
             break  # Day
+        day_input = int(regex_match.group()) # Extracts only matched string, converts to INT => Removes leading zeros
         break  # Wrapper
-    month_input = int(_user_month_input)
-    date_input = int(_user_date_input)
+
+    return month_input, day_input
+
+
 

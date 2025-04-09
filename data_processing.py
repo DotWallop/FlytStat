@@ -31,6 +31,8 @@ def insert_triage_col(old_col):
 
     print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
 
+def df_value_filter(col_name, filter_value):
+    return df
 
 # Check if spreadsheet exists, if so, load it into a Pandas dataframe
 if not sheet_path.exists():
