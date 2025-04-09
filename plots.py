@@ -1,8 +1,6 @@
 ﻿import matplotlib.pyplot as plt
 import numpy as np
-from data_processing import date_range
-from common import URGENCY_LEVEL
-
+from metrics import get_triage_stats_per_day
 # Stacked bar chart per day TODO: Decide if the data definition belongs here, or in data_processing
 hours_in_day = np.array([f"{hour:02d}" for hour in range(24)])
 

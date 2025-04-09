@@ -15,8 +15,8 @@ def get_date_info():
     }
 
 
-URGENCY_LEVEL = { "NotUrgent": 1,
+URGENCY_LEVELS = {"NotUrgent": 1,
                   "LessUrgent": 2,
                   "Urgent": 3,
                   "Resuscitation": 4
-                 }
+                  }
