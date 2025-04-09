@@ -2,7 +2,7 @@
 This file handles the data processing necessary for the plots to function.
 It expects a hashed xlsx file, so run npr_hashing.py first.
 """
-from metrics import urgency_level
+from common import URGENCY_LEVEL, get_date_info
 
 import pandas as pd
 from pathlib import Path
@@ -24,9 +24,9 @@ def insert_triage_col(old_col):
         return False
 
     print(f"Mapping '{old_col}'.\n This might take some time ...")  # Console print
-    # Mapping old_col string values to urgency_level int counterpart, inserts col right of old original col
+    # Mapping old_col string values to URGENCY_LEVEL int counterpart, inserts col right of old original col
     new_col_index = df.columns.get_loc(old_col) + 1  # TODO: Test get_loc
-    mapped_urgency_values = df[old_col].map(urgency_level)
+    mapped_urgency_values = df[old_col].map(URGENCY_LEVEL)
     df.insert(new_col_index, new_col_name, mapped_urgency_values)
 
     print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
@@ -50,7 +50,8 @@ insert_triage_col('Klinisk bekymring i første triage')
 DATETIME_COLUMNS = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
 df[DATETIME_COLUMNS] = df[DATETIME_COLUMNS].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
 
-
+# Initialize date info
+GLOBAL_DATE_INFO = get_date_info()
 
 # Outputs modified file to the excel file
 try:
