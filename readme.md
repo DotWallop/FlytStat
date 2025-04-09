@@ -7,12 +7,12 @@ TBA
 ## Background
 TBA
 ## Progress requirements
-* [ ] Arrays
+* [x] Arrays
 * [ ] Vector calculation
 * [x] If / Else comparators
 * [x] For- or While-loops
 * [x] Read and write data to file
-* [ ] Plotting
+* [x] Plotting
 * [x] Custom functions
 
 ## Feature summary:
@@ -49,10 +49,11 @@ TBA
 
 </details>
 ---
+
 ## TBD: Explain reasons for going outside scope
   - Codecademy kurs Pandas, numpy+matplotlib
   - Mimo + Codecademy Python
-
+  - 
 ---
 ## ⭐ Key Learning Points
 I learned a lot of things throughout this project. I have summarized them for myself, and for whomever is reading this.
@@ -70,6 +71,6 @@ I learned a lot of things throughout this project. I have summarized them for my
 <details>
   <summary>(Hot take) - PEP8 is a cult manual</summary>
   After taking the time to read through the entirety of PEP8, I realize that a lot of it resembles OCD-fueled rambling.
-  Don't get me wrong, PEP8 is very useful, but I do not see it as an answer key to writing Python. 79 chars is extreme.
-  "Know the rules, and know when to break them".
+  Don't get me wrong, PEP8 is very useful, but it is quite a fun read!
+  __"Know the rules, and know when to break them"__.
 </details>

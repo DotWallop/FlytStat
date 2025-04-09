@@ -2,7 +2,6 @@
 Utility function file for common and global variables.
 """
 
-
 URGENCY_LEVELS = {"NotUrgent": 1,
                   "LessUrgent": 2,
                   "Urgent": 3,

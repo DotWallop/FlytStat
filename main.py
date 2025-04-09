@@ -1,8 +1,6 @@
 # import pandas as pd
 # from plots import *
 
-
-
 print("[bold cyan]Velkommen!\n\nVelg ønsket funksjon:[/]")
 # List of function options. 
 input_options = ("Søk opp statistikk", "Vis datagrunnlag")

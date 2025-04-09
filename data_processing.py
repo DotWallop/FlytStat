@@ -7,13 +7,11 @@ from pathlib import Path
 
 import pandas as pd
 
-
 sheet_path = Path('data/vestfoldtriage_data_hashed.xlsx')
 
 # Check if spreadsheet exists, if so, load it into a Pandas dataframe
 if not sheet_path.exists():
     raise FileNotFoundError(f"Kan ikke finne angitt fil: {sheet_path.resolve()}!\nHar du kjørt 'npr_hashing.py'?")
-
 df = pd.read_excel(sheet_path)
 
 def insert_triage_col(old_col):
@@ -51,8 +49,6 @@ def get_date_info():
     }
 
 if __name__ == "__main__":
-
-
     # Mapping string keys to their respective int value to enable comparison
     TRIAGE_COLUMNS = ['Resultat av første pretriage', 'Resultat av første legerespons', 'Resultat av første triage', 'Klinisk bekymring i første triage']
     for column in TRIAGE_COLUMNS:

@@ -88,4 +88,3 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
             ]
             patient_stats[level] = len(counter)
         return patient_stats
-
