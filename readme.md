@@ -48,7 +48,28 @@ TBA
   I have some experience with SQLite, but as that is outside the scope of PY1010, I chose not to include it.
 
 </details>
-
-# TBD: Explain reasons for going outside scope
+---
+## TBD: Explain reasons for going outside scope
   - Codecademy kurs Pandas, numpy+matplotlib
   - Mimo + Codecademy Python
+
+---
+## ⭐ Key Learning Points
+I learned a lot of things throughout this project. I have summarized them for myself, and for whomever is reading this.
+<details>
+  <summary>Follow established best practice!</summary>
+  Stick to best practice. Proactively using DRY, YAGNI and others that I've probably not heard about yet goes a long way.
+
+</details>
+
+<details>
+  <summary>Narrow file scope</summary>
+  Circular import issues, not being able to find the function you want etc... Keep global settings to a global file.
+</details>
+
+<details>
+  <summary>(Hot take) - PEP8 is a cult manual</summary>
+  After taking the time to read through the entirety of PEP8, I realize that a lot of it resembles OCD-fueled rambling.
+  Don't get me wrong, PEP8 is very useful, but I do not see it as an answer key to writing Python. 79 chars is extreme.
+  "Know the rules, and know when to break them".
+</details>
