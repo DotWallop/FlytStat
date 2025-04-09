@@ -1,8 +1,7 @@
 """
 Utility function file for common and global variables.
 """
-import pandas as pd
-import numpy as np
+
 
 URGENCY_LEVELS = {"NotUrgent": 1,
                   "LessUrgent": 2,

@@ -1,5 +1,6 @@
 ﻿from common import HOUR_LABELS
 from metrics import get_triage_stats_per_unit, user_date_prompt_to_timestamp
+from plot_styling import triage_style
 from data_processing import df
 
 import matplotlib.pyplot as plt
@@ -24,15 +25,19 @@ def build_stacked_bar_triage_for_day():
 
 
 
-    width = 0.5
+    width = 0.6
 
-    fix, ax = plt.subplots()
+    fix, ax = plt.subplots(figsize=(14,7))
     bottom = np.zeros(24)  # Initializes an array of 24 zeros. Will be the bottom of the bar chart.
     for label, count in triage_counts.items():
-        p = ax.bar(HOUR_LABELS, count, width, label=label, bottom=bottom)
+        p = ax.bar(HOUR_LABELS, count, width, label=label, bottom=bottom, color=triage_style[label])
         bottom += count
-    ax.set_title(f"Antall pasienter ankommet akuttsenteret\n{selected_date.strftime("%d. %B %Y")}")
+    ax.set_title(f"Antall pasienter ankommet akuttsenteret\n{selected_date.strftime("%d. %B %Y")}", fontsize=22, weight='bold')
+    ax.set_xlabel("Tid på døgnet", fontsize=12)
+    ax.set_ylabel("Antall pasienter", fontsize=12)
     ax.legend(loc="upper right")
+    ax.grid(True, axis='y', linestyle='-', alpha=0.6)
+    ax.tick_params(axis='x', labelrotation=30)
 
     plt.show()
 
