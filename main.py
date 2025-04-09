@@ -2,8 +2,6 @@
 # from plots import *
 
 
-# === INIT ===
-traceback.install(show_locals=True)
 
 print("[bold cyan]Velkommen!\n\nVelg ønsket funksjon:[/]")
 # List of function options. 
@@ -31,3 +29,5 @@ match user_choice:
     case _:
         raise KeyError(f"{str(user_choice)} is not a valid entry.")
 # Wrap entire pipeline in a while True-loop? Add a "return to main" within the subsections, that clears the terminal if possible?
+
+# helsetjenesten fortjener bedre
