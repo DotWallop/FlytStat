@@ -8,23 +8,34 @@ import numpy as np
 
 # -- DYNAMIC VALUES -- #
 
-def get_triage_stats_per_day(date) -> dict:  # TODO: Create tests? Pytest
+def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
     patient_stats = {}
 
-    for level in URGENCY_LEVELS:
-        counter = df.loc[
-            (df['Resultat av første triage'] == level)
-            & (df['Ankomst'].dt.date == date.date())
-        ]
-        patient_stats[level] = len(counter)
-    return patient_stats
+    if datetime_prop == 'hour':
+        for hour in range(24):
+            hourly_stats = {}
+            for level in URGENCY_LEVELS:
+                counter = df.loc[
+                    (df['Resultat av første triage'] == level)
+                    & (df['Ankomst'].dt.date == date.date())
+                    & (df['Ankomst'].dt.hour == hour)
+                ]
+                hourly_stats[level] = len(counter)
+            patient_stats[hour] = hourly_stats
+        return patient_stats
+
+    else:
+        for level in URGENCY_LEVELS:
+            counter = df.loc[
+                (df['Resultat av første triage'] == level)
+                & (df['Ankomst'].dt.date == date.date())
+            ]
+            patient_stats[level] = len(counter)
+        return patient_stats
 
 def dict_to_np_array(dict):
     for key in dict:
         key
-
-def triage_stats_per_hour(date) -> dict:
-    pass
 
 
 # -- USER INPUTS -- #
