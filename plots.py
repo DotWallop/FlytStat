@@ -1,5 +1,5 @@
 ﻿from common import HOUR_LABELS
-from metrics import get_triage_stats_per_unit, user_date_prompt_to_timestamp
+from metrics import get_triage_stats_per_unit, user_date_prompt_to_timestamp, get_relative_symptom_counts
 from plot_styling import triage_style
 
 import matplotlib.pyplot as plt
@@ -39,7 +39,23 @@ def build_stacked_bar_triage_for_day():
     plt.show()
     return f"Generating plot for {selected_date.strftime("%d. %B %Y")} ..."
 
-bar_chart = build_stacked_bar_triage_for_day()  # Run
+
+# bar_chart = build_stacked_bar_triage_for_day()  # Run
+
+def build_symptom_pie_chart():
+    selected_date = user_date_prompt_to_timestamp()
+    relative_count_dict = get_relative_symptom_counts(selected_date)
+
+    labels = list(relative_count_dict.keys())
+    values = list(relative_count_dict.values())
+
+    fig, ax = plt.subplots()
+    ax.pie(values, labels=labels)
+
+    plt.show()
+    return f"Generating plot for {selected_date.strftime("%d. %B %Y")} ..."
+
+pie_chart = build_symptom_pie_chart()
 
 # Pie charts - quantity of the most prevalent diagnoses that day? Input date?
 # - Maybe add an attribute if you want to see day, month or year - and inform the user through input() statements pre-call

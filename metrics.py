@@ -89,25 +89,24 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
             triage_count_stats[level] = len(counter)
         return triage_count_stats
 
-def get_symptom_stats_per_date(date) -> dict:
+def get_symptom_stats_by_date(date) -> dict:
     symptom_count = {}
     for symptom in SYMPTOM_COLUMNS:
         patients_per_day = df.loc[(df[symptom] == 'X') & (df['Ankomst'].dt.date == date.date())]
         symptom_count[symptom] = len(patients_per_day)
-
     sorted_symptom_count = dict(sorted(symptom_count.items(), key=lambda item: item[1], reverse=True))  # Helped build by plt docs
     return sorted_symptom_count
 
-def convert_symptom_count_to_relative_size(symptom_count: dict):
-    total_patients = sum(symptom_count.values())
-
+def convert_counts_to_relative_size(sorted_symptom_count: dict):
+    total_patients = sum(sorted_symptom_count.values())
     if total_patients == 0:  # Prevents dividing by zero.. ;-)
-        return {symptom: 0 for symptom in symptom_count}
-
-    relative_number_of_patients = {symptom: count / total_patients for symptom, count in symptom_count.items()}
+        return {symptom: 0 for symptom in sorted_symptom_count}
+    relative_number_of_patients = {symptom: count / total_patients for symptom, count in sorted_symptom_count.items()}
     return relative_number_of_patients
 
-
+def get_relative_symptom_counts(date):
+    sorted_counts = get_symptom_stats_by_date(date)
+    return convert_counts_to_relative_size(sorted_counts)
 
 
 

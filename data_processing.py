@@ -48,6 +48,8 @@ def get_date_info():
         "date_range": pd.date_range(first_date,last_date, freq='D')
     }
 
+SYMPTOM_COLUMNS = df.columns[12:].tolist()
+
 if __name__ == "__main__":
     # Mapping string keys to their respective int value to enable comparison
     TRIAGE_COLUMNS = ['Resultat av første pretriage', 'Resultat av første legerespons', 'Resultat av første triage', 'Klinisk bekymring i første triage']
