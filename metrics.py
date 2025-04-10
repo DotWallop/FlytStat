@@ -11,7 +11,7 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
     A top-level, nested function that prompts the user to input a month and date for data visualization.
     get_valid_month_day() -- Runs the input flow and validates it with simple RegEx, outputs month_input, day_input
     get_year_from_month_and_day() -- Calculates the year based on month and day input
-    :returns: pd.Timestamp from user prompt
+    :returns: pd.Timestamp object from user prompt
     """
     def get_valid_month_day() -> tuple[int, int]:
         """ Runs user prompt and validates to regex pattern """
@@ -65,9 +65,9 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
 
 
 def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
-    patient_stats = {}
+    triage_count_stats = {}
 
-    if datetime_prop == 'hour':
+    if datetime_prop == 'hour': # TODO: Refactor, should be day?
         for hour in range(24):
             hourly_stats = {}
             for level in URGENCY_LEVELS:
@@ -77,8 +77,8 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
                     & (df['Ankomst'].dt.hour == hour)
                 ]
                 hourly_stats[level] = len(counter)
-            patient_stats[hour] = hourly_stats
-        return patient_stats
+            triage_count_stats[hour] = hourly_stats
+        return triage_count_stats
 
     else:
         for level in URGENCY_LEVELS:
@@ -86,5 +86,17 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
                 (df['Resultat av første triage'] == level)
                 & (df['Ankomst'].dt.date == date.date())
             ]
-            patient_stats[level] = len(counter)
-        return patient_stats
+            triage_count_stats[level] = len(counter)
+        return triage_count_stats
+
+def get_symptom_stats_per_unit(date, datetime_prop='date'):
+    symptom_stats = {}
+
+    if datetime_prop == 'day':
+        
+
+
+
+
+
+

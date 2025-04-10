@@ -60,7 +60,10 @@ if __name__ == "__main__":
 
     GLOBAL_DATE_INFO = get_date_info()
 
-    # Outputs modified file to the excel file
+    SYMPTOM_COLUMNS = df.columns[12:].tolist()
+
+    # Outputs modified file to the Excel file
+    print("Skriver til fil... Dette kan ta litt tid.")
     try:
         df.to_excel(sheet_path, index=False)
     except ValueError:

@@ -69,7 +69,15 @@ I learned a lot of things throughout this project. I have summarized them for my
 </details>
 
 <details>
+  <summary>Function before looks!</summary>
+  It's **super** easy to get carried away exploring how to make the program prettier. I spent a bit too much time fiddling around with
+  visual libraries and originally implemented the Rich library with Loguru for pretty-print and rich console output. However this added complexity,
+  And gave errors I did not know how to fix. Thus, I made the decision to remove them. Rookie mistake!
+</details>
+
+<details>
   <summary>(Hot take) - PEP8 is a cult manual</summary>
+  Ok, maybe not __THAT__ bad 😁, but ...
   After taking the time to read through the entirety of PEP8, I realize that a lot of it resembles OCD-fueled rambling.
   Don't get me wrong, PEP8 is very useful, but it is quite a fun read!
   __"Know the rules, and know when to break them"__.

@@ -7,7 +7,7 @@ import pandas as pd
 """
 Note: I had some help figuring this logic out from a developer friend of mine.
 I researched the pickle-library and figured out the best solution I could come up with for this.
-I also came to the conclusion that the most secure thing was to run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
+I also came to the conclusion that the most secure thing was t o run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
 """
 
 
