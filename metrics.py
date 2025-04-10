@@ -2,7 +2,7 @@
 This file handles most of the metrics in the application - variable setting and user input functions.
 """
 from common import URGENCY_LEVELS
-from data_processing import df
+from data_processing import df, SYMPTOM_COLUMNS
 import re
 import pandas as pd
 
@@ -89,11 +89,24 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
             triage_count_stats[level] = len(counter)
         return triage_count_stats
 
-def get_symptom_stats_per_unit(date, datetime_prop='date'):
-    symptom_stats = {}
+def get_symptom_stats_per_date(date) -> dict:
+    symptom_count = {}
+    for symptom in SYMPTOM_COLUMNS:
+        patients_per_day = df.loc[(df[symptom] == 'X') & (df['Ankomst'].dt.date == date.date())]
+        symptom_count[symptom] = len(patients_per_day)
 
-    if datetime_prop == 'day':
-        
+    sorted_symptom_count = dict(sorted(symptom_count.items(), key=lambda item: item[1], reverse=True))  # Helped build by plt docs
+    return sorted_symptom_count
+
+def convert_symptom_count_to_relative_size(symptom_count: dict):
+    total_patients = sum(symptom_count.values())
+
+    if total_patients == 0:  # Prevents dividing by zero.. ;-)
+        return {symptom: 0 for symptom in symptom_count}
+
+    relative_number_of_patients = {symptom: count / total_patients for symptom, count in symptom_count.items()}
+    return relative_number_of_patients
+
 
 
 
