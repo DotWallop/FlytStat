@@ -5,6 +5,8 @@ from plot_styling import triage_style
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.style.use('ggplot')
+
 # Stacked bar chart per day TODO: Decide if the data definition belongs here, or in data_processing
 
 def build_stacked_bar_triage_for_day():
@@ -42,18 +44,35 @@ def build_stacked_bar_triage_for_day():
 
 # bar_chart = build_stacked_bar_triage_for_day()  # Run
 
-def build_symptom_pie_chart():
+def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in grouping
     selected_date = user_date_prompt_to_timestamp()
     relative_count_dict = get_relative_symptom_counts(selected_date)
+    # Grouping
+    symptom_labels = []
+    symptom_values = []
+    other_total = 0.0
 
-    labels = list(relative_count_dict.keys())
-    values = list(relative_count_dict.values())
+    for label, value in relative_count_dict.items():
+        if value >= threshold:
+            symptom_labels.append(label)
+            symptom_values.append(value)
+        else:
+            other_total += value
+
+    if other_total > 0:
+        symptom_labels.append("Andre")
+        symptom_values.append(other_total)
 
     fig, ax = plt.subplots()
-    ax.pie(values, labels=labels)
+
+    ax.pie(symptom_values, labels=symptom_labels, autopct='%1.1f%%', startangle=140)
+    ax.axis('equal')  # Aspect ratio
+    ax.set_title(f"Fordeling av symptomer i akuttsenter\n{selected_date.strftime('%d. %B %Y')}")
+    plt.tight_layout()
 
     plt.show()
-    return f"Generating plot for {selected_date.strftime("%d. %B %Y")} ..."
+    return f"Generating plot for {selected_date.strftime('%d. %B %Y')} ..."
+
 
 pie_chart = build_symptom_pie_chart()
 
