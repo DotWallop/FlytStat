@@ -1,4 +1,5 @@
 # FlytStat
+[![GitHub release](https://img.shields.io/github/v/release/DotWallop/FlytStat?style=flat-square)](https://github.com/DotWallop/FlytStat/releases)
 
 ## 🩺 TL;DR
 FlytStat is a command-line based ETL application for anonymized triage data from a Norwegian hospital's ER system.
