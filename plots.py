@@ -1,4 +1,4 @@
-﻿from common import HOUR_LABELS
+from common import HOUR_LABELS
 from metrics import get_triage_stats_per_unit, user_date_prompt_to_timestamp, get_relative_symptom_counts
 from plot_styling import triage_style
 
@@ -75,13 +75,6 @@ def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in
 
 
 # pie_chart = build_symptom_pie_chart()
-
-# Pie charts - quantity of the most prevalent diagnoses that day? Input date?
-# - Maybe add an attribute if you want to see day, month or year - and inform the user through input() statements pre-call
-
-
-# Bar chart - Triage per day
-
 # Line plot or similar - patients per hour per triage category (input: date)
 
-# Test out matplotlib's subplot feature to make multiple plots!
+# TODO: Test out matplotlib's subplot feature to make multiple plots!

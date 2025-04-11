@@ -14,7 +14,7 @@ while True:
     for index, value in enumerate(main_page_choices, start=1):
         print(f"[{index}]  {value}")
     print(f"[{exit_option}]  Avslutt")  # Dynamically set
-    print("—"*23)  # Horizontal seperator
+    print("—"*23 + "\n")  # Horizontal seperator
 
     try:
         user_choice = int(input("Valg: "))
