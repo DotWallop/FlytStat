@@ -5,6 +5,7 @@ Staggered import to ensure proper handling of dependencies (lazy loading concept
 
 from common import HASHED_SHEET_PATH
 import pages.statistics_page as sub_stats
+import pages.metadata_page as meta_page
 import scripts.npr_hashing as hash_script
 
 
@@ -42,10 +43,8 @@ while True:
             input("Trykk på Enter-tasten for å returnere til menyen ...")  # A loop pause, preventing menu from automatically popping up
 
         case 2:
-            print(2)
+            meta_page.run()
             input("Trykk på Enter-tasten for å returnere til menyen ...")  # A loop pause, preventing menu from automatically popping up
-            # TODO: Add a function (in own function file?) that returns the metadata
-            # TODO: Add meta info as an input option, min-max of source date column to see date range, number of patients, etc.
 
         case _ if user_choice == exit_option:  # After some trial and error I found this works, not sure if it is best practice.
             break

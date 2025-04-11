@@ -3,12 +3,12 @@ This file handles the data processing necessary for the plots to function.
 It expects a hashed xlsx file, so run npr_hashing.py first.
 """
 from common import URGENCY_LEVELS, HASHED_SHEET_PATH
-from pathlib import Path
-
 import pandas as pd
 
+df = None  # Initialized for get_metadata() comparison
 
 def load_data():
+    global df
     # Check if spreadsheet exists, if so, load it into a Pandas dataframe
     if not (HASHED_SHEET_PATH.exists()):
         raise FileNotFoundError(f"Kan ikke finne angitt fil: {HASHED_SHEET_PATH.resolve()}!\nHar du kjørt 'npr_hashing.py'?")
@@ -35,18 +35,7 @@ def load_data():
 
         print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
 
-    # Initialize date info
-    def get_metadata():
-        first_date = df['Ankomst'].min()
-        last_date = df['Ankomst'].max()
-        total_patient_count = len(df)
 
-        return {
-            "first_date": first_date,
-            "last_date": last_date,
-            "date_range": pd.date_range(first_date,last_date, freq='D'),
-            "total_patient_count": total_patient_count
-        }
 
     SYMPTOM_COLUMNS = df.columns[12:].tolist()
 
@@ -59,8 +48,6 @@ def load_data():
         # Applying Pandas' .to_datetime function to all datetime-columns
         DATETIME_COLUMNS = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
         df[DATETIME_COLUMNS] = df[DATETIME_COLUMNS].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
-
-        GLOBAL_DATE_INFO = get_metadata()
 
         SYMPTOM_COLUMNS = df.columns[12:].tolist()
 
@@ -79,3 +66,19 @@ def load_data():
 
     return df, SYMPTOM_COLUMNS  # Reads file so it can be stored in variable
 
+# Initialize date info
+def get_metadata():
+    global df  # Access global df from within the function
+    if df is None or df.empty:  # also checks if df exists but is empty (failed run)
+        load_data()  # Load data if it is not already loaded (hence df would exist)
+
+    first_date = df['Ankomst'].min()
+    last_date = df['Ankomst'].max()
+    total_patient_count = len(df)
+
+    return {
+        "first_date": first_date,
+        "last_date": last_date,
+        "date_range": pd.date_range(first_date,last_date, freq='D'),
+        "total_patient_count": total_patient_count
+    }
