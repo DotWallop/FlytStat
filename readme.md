@@ -56,6 +56,28 @@ FlytStat is run as a CLI tool, and the current version is an **MVP**, but featur
   I have some experience with SQLite, but as that is outside the scope of PY1010, I chose not to include it.
 </details>
 
+<details>
+  <summary>📊 Plotting</summary>
+
+  The plots are generated using Matplotlib. Whilst not 100% aesthetically pleasing, they serve their purpose for an MVP.
+
+  For a future review, I would consider changing out the model to Seaborn or Plotly.
+</details>
+
+<details>
+  <summary>🐼 Pandas DataFrames</summary>
+
+  The source data contains roughly 30,000 patient lines, and is the reason why the performance suffers on load. I will consider fixing this in the future, migrating the data into a SQLite or PostgreSQL database.
+
+</details>
+
+<details>
+  <summary>💻 CLI-based</summary>
+
+  FlytStat is CLI based, however in a future version I will migrate it to a Django GUI project.
+  
+</details>
+
 ## 🚀 Installation:
 ### 1. Clone Repository and 'CD' in
 ```bash
