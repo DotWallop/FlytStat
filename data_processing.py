@@ -77,5 +77,5 @@ def load_data():
         else:
             print("Lagret fil!")
 
-        return pd.read_excel(HASHED_SHEET_PATH)  # Reads file so it can be stored in variable
+        return df, SYMPTOM_COLUMNS  # Reads file so it can be stored in variable
 

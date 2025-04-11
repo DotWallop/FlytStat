@@ -6,7 +6,7 @@ from data_processing import load_data
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = load_data()
+df, SYMPTOM_COLUMNS = load_data()
 plt.style.use('ggplot')
 
 # Stacked bar chart per day TODO: Decide if the data definition belongs here, or in data_processing
