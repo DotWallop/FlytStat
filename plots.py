@@ -74,7 +74,7 @@ def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in
     return f"Generating plot for {selected_date.strftime('%d. %B %Y')} ..."
 
 
-pie_chart = build_symptom_pie_chart()
+# pie_chart = build_symptom_pie_chart()
 
 # Pie charts - quantity of the most prevalent diagnoses that day? Input date?
 # - Maybe add an attribute if you want to see day, month or year - and inform the user through input() statements pre-call
