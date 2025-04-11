@@ -1,9 +1,8 @@
 <p align="center">
-  <img src="https://i.ibb.co/XrKgGnTT/flytstat-horisontal-white.png#gh-light-mode-only" alt="flytstat-horisontal-white" width="400"></a>
-  <img src="https://i.ibb.co/WNLsxkx2/flytstat-horisontal-wh.png#gh-dark-mode-only" alt="flytstat-horisontal-wh" width="400"></a>
+  <img src="https://i.ibb.co/XrKgGnTT/flytstat-horisontal-white.png" alt="flytstat-horisontal-white" width="400"></a>
 </p>
-[![GitHub release](https://img.shields.io/github/v/release/DotWallop/FlytStat?style=flat-square)](https://github.com/DotWallop/FlytStat/releases)
 
+![GitHub Release](https://img.shields.io/github/v/release/DotWallop/FlytStat)
 
 ## 🩺 TL;DR
 FlytStat is a command-line based ETL application for anonymized triage data from a Norwegian hospital's ER system.
