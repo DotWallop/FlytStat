@@ -2,7 +2,7 @@
 This file handles most of the metrics in the application - variable setting and user input functions.
 """
 from common import URGENCY_LEVELS
-from data_processing import df, SYMPTOM_COLUMNS
+from data_processing import SYMPTOM_COLUMNS
 import re
 import pandas as pd
 
@@ -65,7 +65,7 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
     return timestamp
 
 
-def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
+def get_triage_stats_per_unit(df, date, datetime_prop='date') -> dict:  # TODO: Create tests? Pytest
     triage_count_stats = {}
 
     if datetime_prop == 'hour': # TODO: Refactor, should be day?
@@ -90,7 +90,7 @@ def get_triage_stats_per_unit(date, datetime_prop='date') -> dict:  # TODO: Crea
             triage_count_stats[level] = len(counter)
         return triage_count_stats
 
-def get_symptom_stats_by_date(date) -> dict:
+def get_symptom_stats_by_date(df, date) -> dict:
     symptom_count = {}
     for symptom in SYMPTOM_COLUMNS:
         patients_per_day = df.loc[(df[symptom] == 'X') & (df['Ankomst'].dt.date == date.date())]
@@ -105,7 +105,7 @@ def convert_counts_to_relative_size(sorted_symptom_count: dict):
     relative_number_of_patients = {symptom: count / total_patients for symptom, count in sorted_symptom_count.items()}
     return relative_number_of_patients
 
-def get_relative_symptom_counts(date):
+def get_relative_symptom_counts(df, date):
     sorted_counts = get_symptom_stats_by_date(date)
     return convert_counts_to_relative_size(sorted_counts)
 

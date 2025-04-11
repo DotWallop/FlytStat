@@ -1,10 +1,12 @@
 from common import HOUR_LABELS
 from metrics import get_triage_stats_per_unit, user_date_prompt_to_timestamp, get_relative_symptom_counts
 from plot_styling import triage_style
+from data_processing import load_data
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+df = load_data()
 plt.style.use('ggplot')
 
 # Stacked bar chart per day TODO: Decide if the data definition belongs here, or in data_processing
@@ -15,7 +17,7 @@ def build_stacked_bar_triage_for_day():
     Built with help from matplotlib documentation
     """
     selected_date = user_date_prompt_to_timestamp()
-    patient_triage_dict = get_triage_stats_per_unit(selected_date, 'hour')  # TODO: Make hour inherit from user input?
+    patient_triage_dict = get_triage_stats_per_unit(df,selected_date, 'hour')  # TODO: Make hour inherit from user input?
 
     triage_counts = {
         "NotUrgent Patients": np.array([patient_triage_dict[hour]['NotUrgent'] for hour in range(24)]),
@@ -46,7 +48,7 @@ def build_stacked_bar_triage_for_day():
 
 def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in grouping
     selected_date = user_date_prompt_to_timestamp()
-    relative_count_dict = get_relative_symptom_counts(selected_date)
+    relative_count_dict = get_relative_symptom_counts(df, selected_date)
     # Grouping
     symptom_labels = []
     symptom_values = []
