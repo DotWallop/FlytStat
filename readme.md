@@ -1,31 +1,29 @@
 # FlytStat
 
-FlytStat (Flyttavle Statistics) is a lightweight tool comprised of statistics from the Emergency Room of a norwegian hospital<br>
-It serves as the final assignment (prosjektoppgave) for the USN PY1010 course.
+## 🩺 TL;DR
+FlytStat is a command-line based ETL application for anonymized triage data from a Norwegian hospital's ER system.
+It hashes patient IDs, transforms timestamped records, and graphs patient inflow and symptom distributions.
 
-## Purpose
+Built as a final project for the USN PY1010 course.
+
+## 📚 Table of Contents
+
+- [Purpose](#purpose)
+- [Feature Summary](#feature-summary)
+- [Installation](#installation)
+- [Key Learning Points](#key-learning-points)
+- [Disclaimer on Scope, Competence and AI](#-disclaimer-on-scope-competence-and-ai)
+- [Project Structure](#project-structure)
+- [License / Usage Disclaimer](#license--usage-disclaimer)
+
+## ❓Purpose
 
 The tool aims to serve as an [ETL pipeline](https://en.wikipedia.org/wiki/Extract,_transform,_load), extracting a raw datadump from the host software's statistics servers, transform them into a parseable,
 structured and dynamically accessible format, then load it into a graphical presentation.
 
 FlytStat is run as a CLI tool, and the current version is an **MVP**, but feature-complete for the scope of the assignment.
 
-## Installation:
-### 1. Clone Repository and 'CD' in
-```py
-git clone https://github.com/DotWallop/FlytStat.git
-cd FlytStat
-```
-
-### 2. Install required packages
-```py
-pip install -r requirements.txt
-```
-
-### 3. Run `main.py`
-
-
-## Feature summary:
+## 🏷️ Feature summary:
 <details>
   <summary>🔒 Patient data anonymization</summary>
   
@@ -41,7 +39,7 @@ pip install -r requirements.txt
   ### Skills used:
   - Custom functions
   - reading data from file
-  - plotting data to file
+  - Serializing and anonymizing patient data using pickle mapping
   - if-statements
   - for-loops (counter)
 </details>
@@ -57,13 +55,23 @@ pip install -r requirements.txt
   For a file this large, I would for a production project always have gone with a CSV file (or in reality, a database, even a lightweight one like SQLite) to give better options.
   I have some experience with SQLite, but as that is outside the scope of PY1010, I chose not to include it.
 </details>
+
+## 🚀 Installation:
+### 1. Clone Repository and 'CD' in
+```bash
+git clone https://github.com/DotWallop/FlytStat.git
+cd FlytStat
+```
+
+### 2. Install required packages
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run `main.py`
+
 ---
 
-## TBD: Explain reasons for going outside scope
-  - Codecademy kurs Pandas, numpy+matplotlib
-  - Mimo + Codecademy Python
-  - 
----
 ## ⭐ Key Learning Points
 I learned a lot of things throughout this project. I have summarized them for myself, and for whomever is reading this.
 <details>
@@ -106,6 +114,41 @@ I learned a lot of things throughout this project. I have summarized them for my
 
   Ok, maybe not __THAT__ bad 😁, but ...
   After taking the time to read through the entirety of PEP8, I realize that a lot of it resembles OCD-fueled rambling.
-  Don't get me wrong, PEP8 is very useful, but it is quite a fun read!
+  
+Don't get me wrong, PEP8 is very useful, but it is quite a fun read!
+
   __"Know the rules, and know when to break them"__.
 </details>
+
+---
+## 🤖 Scope, Competence and AI:
+
+I think it's worth mentioning that I have been honing my Python skills in my free time, expanding from the class scope.
+
+In addition to classes, I have been using [Mimo](https://mimo.org) as well as taking several [Codecademy](https://www.codecademy.com)
+courses on Python, Pandas and Matplotlib & NumPy. That is the reason for going slightly outside of scope.
+
+I have utilized ChatGPT and Claude for bugfixing and explanation on specific subjects, including explaining more complex system logic. Nothing has been __built__ purely from AI.
+
+
+## 📂 Project Structure
+
+```text
+├── main.py                     # Entry point CLI menu
+├── common.py                  # Global constants and paths
+├── data_processing.py         # Data loading and transformation
+├── metrics.py                 # Triage and symptom statistics
+├── plots.py                   # Visualization logic
+├── plot_styling.py            # Centralized plot color styling
+├── pages/
+│   ├── metadata_page.py       # Dataset overview display
+│   └── statistics_page.py     # Submenu for plotting
+├── scripts/
+│   └── npr_hashing.py         # Patient ID hashing logic
+├── data/                      # Contains original and hashed data files
+├── requirements.txt
+└── readme.md
+```
+## ⚖️ License / Usage Disclaimer
+This project is built as a coursework submission. It is not intended for clinical or production use.
+Patient data is handled securely and fully anonymized (only placeholder numbers are included), but the repository only contains test-safe, hashed output and never stores NPR IDs.

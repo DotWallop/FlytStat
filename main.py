@@ -2,15 +2,12 @@
 Main page, handles CLI choice logic.
 Staggered import to ensure proper handling of dependencies (lazy loading concept)
 """
-
 from common import HASHED_SHEET_PATH
 import pages.statistics_page as sub_stats
 import pages.metadata_page as meta_page
 import scripts.npr_hashing as hash_script
 
-
-
-main_page_choices = ("Vis statistikk", "Vis datagrunnlag")  # List of function options  TODO: If time: patient search? List patient from ID etc.
+main_page_choices = ("Vis statistikk", "Vis datagrunnlag")  # List of function options
 exit_option = len(main_page_choices) + 1  # Dynamically sets index for exit option
 print("*"*18 + "\n     FlytStat     \n" + "*"*18)
 

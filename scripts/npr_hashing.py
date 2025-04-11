@@ -17,10 +17,13 @@ def hash_aliases_from_excel():
         print(f"{file_path.name} er lastet inn!")
     except FileNotFoundError:
         print(f"Kan ikke finne fil {file_path.name} i mappe: {file_path.parent}!")
+        return
     except PermissionError:
         print(f"Ingen tilgang til {file_path}! Har du filen åpen?")
+        return
     except ValueError as e:
         print(f"Ånei! Noe gikk galt: \n{e}")
+        return
 
 
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table

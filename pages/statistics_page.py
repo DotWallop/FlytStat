@@ -1,9 +1,9 @@
-import plots
+
 from plots import build_stacked_bar_triage_for_day, build_symptom_pie_chart
 
 def run():
     while True:
-        stats_page_choices = ("Stablet stolpediagram -- Pasienter innlagt per time",  # TODO: Func name as comment
+        stats_page_choices = ("Stablet stolpediagram -- Pasienter innlagt per time",
                               "Sektordiagram -- Andel av symptomtype per døgn"
                               )
         exit_option = len(stats_page_choices) + 1
@@ -22,11 +22,11 @@ def run():
 
         match user_choice:  # I could make it more advanced and dynamically build the list and func calls, but for the scope of the project I decided not to.
             case 1:
-                plots.build_stacked_bar_triage_for_day()
+                build_stacked_bar_triage_for_day()
                 input("Trykk på Enter-tasten for å returnere til menyen ...")  # A loop pause, preventing menu from automatically popping up
 
             case 2:
-                plots.build_symptom_pie_chart()
+                build_symptom_pie_chart()
                 input("Trykk på Enter-tasten for å returnere til menyen ...")  # A loop pause, preventing menu from automatically popping up
 
             case _ if user_choice == exit_option:

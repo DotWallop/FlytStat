@@ -35,8 +35,6 @@ def load_data():
 
         print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
 
-
-
     SYMPTOM_COLUMNS = df.columns[12:].tolist()
 
     if __name__ == "__main__":
@@ -48,8 +46,6 @@ def load_data():
         # Applying Pandas' .to_datetime function to all datetime-columns
         DATETIME_COLUMNS = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
         df[DATETIME_COLUMNS] = df[DATETIME_COLUMNS].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
-
-        SYMPTOM_COLUMNS = df.columns[12:].tolist()
 
         # Outputs modified file to the Excel file
         print("Skriver til fil... Dette kan ta litt tid.")
