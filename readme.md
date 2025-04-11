@@ -9,12 +9,12 @@ Built as a final project for the USN PY1010 course.
 ## 📚 Table of Contents
 
 - [Purpose](#purpose)
-- [Feature Summary](#feature-summary)
-- [Installation](#installation)
-- [Key Learning Points](#key-learning-points)
-- [Disclaimer on Scope, Competence and AI](#-disclaimer-on-scope-competence-and-ai)
-- [Project Structure](#project-structure)
-- [License / Usage Disclaimer](#license--usage-disclaimer)
+- [Feature Summary](#%EF%B8%8F-feature-summary)
+- [Installation](#-installation)
+- [Key Learning Points](#-key-learning-points)
+- [Disclaimer on Scope, Competence and AI](#-scope-competence-and-ai)
+- [Project Structure](#-project-structure)
+- [License / Usage Disclaimer](#-license--usage-disclaimer)
 
 ## ❓Purpose
 
