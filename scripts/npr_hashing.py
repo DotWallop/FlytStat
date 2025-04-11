@@ -1,28 +1,25 @@
-import pickle
-from pathlib import Path
-
-import pandas as pd
-
-
 """
 Note: I had some help figuring this logic out from a developer friend of mine.
 I researched the pickle-library and figured out the best solution I could come up with for this.
 I also came to the conclusion that the most secure thing was t o run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
 """
+import pickle
+from pathlib import Path
 
+import pandas as pd
 
 def hash_aliases_from_excel():
-    file_path = Path("../data/sensitive/vestfoldtriage.xlsx") # Set file path
+    file_path = Path("../data/sensitive/vestfoldtriage.xlsx") # Get file path
 
     try:
         df = pd.read_excel(file_path, usecols="A:AQ") # Read the triage Excel file
         print(f"{file_path.name} loaded!")
     except FileNotFoundError:
-        print(f"File {file_path.name} not found at {file_path.parent}!")
+        print(f"Kan ikke finne fil {file_path.name} i mappe: {file_path.parent}!")
     except PermissionError:
-        print(f"Permission denied when accessing {file_path}")
+        print(f"Ingen tilgang til {file_path}! Har du filen åpen?")
     except ValueError as e:
-        print(f"Uh-oh, something went wrong:\n{e}")
+        print(f"Ånei! Noe gikk galt: \n{e}")
 
 
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table

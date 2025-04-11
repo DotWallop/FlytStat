@@ -44,7 +44,8 @@ def user_date_prompt_to_timestamp() -> pd.Timestamp:
             break  # Wrapper
         return month_input, day_input
 
-    def get_year_from_month_and_day(month_input=11, day_input=28) -> int:  #  Default placeholders for testing TODO: Remove placeholders
+    def get_year_from_month_and_day(month_input, day_input) -> int:
+
         """Dataset is from 2024-03-10 to 2025-03-09. Year will be calculated accordingly"""
 
         if month_input > 3:

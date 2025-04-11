@@ -2,6 +2,7 @@
 Main page, handles CLI choice logic
 """
 import pages.statistics_page as sub_stats
+
 main_page_choices = ("Vis statistikk", "Vis datagrunnlag")  # List of function options  TODO: If time: patient search? List patient from ID etc.
 exit_option = len(main_page_choices) + 1  # Dynamically sets index for exit option
 print("*"*18 + "\n     FlytStat     \n" + "*"*18)

@@ -7,12 +7,13 @@ from pathlib import Path
 
 import pandas as pd
 
-sheet_path = Path('data/vestfoldtriage_data_hashed.xlsx')
+ROOT_PATH = Path.cwd() if __name__ == "__main__" else Path(__file__).resolve().parent # Gets working dir if ran from IDE, else full base path
+SHEET_PATH = ROOT_PATH / "data" / "vestfoldtriage_data_hashed.xlsx"
 
 # Check if spreadsheet exists, if so, load it into a Pandas dataframe
-if not sheet_path.exists():
-    raise FileNotFoundError(f"Kan ikke finne angitt fil: {sheet_path.resolve()}!\nHar du kjørt 'npr_hashing.py'?")
-df = pd.read_excel(sheet_path)
+if not SHEET_PATH.exists():
+    raise FileNotFoundError(f"Kan ikke finne angitt fil: {SHEET_PATH.resolve()}!\nHar du kjørt 'npr_hashing.py'?")
+df = pd.read_excel(SHEET_PATH)
 
 def insert_triage_col(old_col):
     """Creates and inserts parsed triage column to the right of the original column"""
@@ -35,17 +36,17 @@ def insert_triage_col(old_col):
 
     print(f"Mapping complete: {mapped_urgency_values.count()} values mapped!") # Console print
 
-def df_value_filter(col_name, filter_value):
-    return df
-
 # Initialize date info
-def get_date_info():
+def get_metadata():
     first_date = df['Ankomst'].min()
     last_date = df['Ankomst'].max()
+    total_patient_count = len(df)
+
     return {
         "first_date": first_date,
         "last_date": last_date,
-        "date_range": pd.date_range(first_date,last_date, freq='D')
+        "date_range": pd.date_range(first_date,last_date, freq='D'),
+        "total_patient_count": total_patient_count
     }
 
 SYMPTOM_COLUMNS = df.columns[12:].tolist()
@@ -60,18 +61,18 @@ if __name__ == "__main__":
     DATETIME_COLUMNS = ['Ankomst', "Avreise", "Tidspunkt for første pretriage", "Tidspunkt for første legerespons", "Tidspunkt for første triage"]
     df[DATETIME_COLUMNS] = df[DATETIME_COLUMNS].apply(pd.to_datetime, errors='coerce') # Coerce = error fields => NaT
 
-    GLOBAL_DATE_INFO = get_date_info()
+    GLOBAL_DATE_INFO = get_metadata()
 
     SYMPTOM_COLUMNS = df.columns[12:].tolist()
 
     # Outputs modified file to the Excel file
     print("Skriver til fil... Dette kan ta litt tid.")
     try:
-        df.to_excel(sheet_path, index=False)
+        df.to_excel(SHEET_PATH, index=False)
     except ValueError:
-        print(f"{sheet_path.name} not found. Please run 'scripts/npr_hashing.py' again to regenerate.")
+        print(f"{SHEET_PATH.name} not found. Please run 'scripts/npr_hashing.py' again to regenerate.")
     except PermissionError:
-        print(f"Could not write to file: permission denied. Do you have {sheet_path.name} open?")
+        print(f"Could not write to file: permission denied. Do you have {SHEET_PATH.name} open?")
     except Exception as e:
         print(f"Unexpected error!\n{e}")
     else:
