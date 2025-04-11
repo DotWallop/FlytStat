@@ -1,6 +1,7 @@
-<a href="https://ibb.co/pBM8kHpp"><img src="https://i.ibb.co/XrKgGnTT/flytstat-horisontal-white.png#gh-light-mode-only" alt="flytstat-horisontal-white" width="400"></a>
-<a href="https://ibb.co/rKVv7x7w"><img src="https://i.ibb.co/WNLsxkx2/flytstat-horisontal-wh.png#gh-dark-mode-only" alt="flytstat-horisontal-wh" width="400"></a>
-
+<p align="center">
+  <img src="https://i.ibb.co/XrKgGnTT/flytstat-horisontal-white.png#gh-light-mode-only" alt="flytstat-horisontal-white" width="400"></a>
+  <img src="https://i.ibb.co/WNLsxkx2/flytstat-horisontal-wh.png#gh-dark-mode-only" alt="flytstat-horisontal-wh" width="400"></a>
+</p>
 [![GitHub release](https://img.shields.io/github/v/release/DotWallop/FlytStat?style=flat-square)](https://github.com/DotWallop/FlytStat/releases)
 
 
