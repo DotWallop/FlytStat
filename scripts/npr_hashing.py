@@ -3,17 +3,19 @@ Note: I had some help figuring this logic out from a developer friend of mine.
 I researched the pickle-library and figured out the best solution I could come up with for this.
 I also came to the conclusion that the most secure thing was t o run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
 """
+from common import ORIGINAL_SHEET_PATH
 import pickle
 from pathlib import Path
 
 import pandas as pd
 
 def hash_aliases_from_excel():
-    file_path = Path("../data/sensitive/vestfoldtriage.xlsx") # Get file path
+    file_path = ORIGINAL_SHEET_PATH # Get file path
+    print(file_path)
 
     try:
         df = pd.read_excel(file_path, usecols="A:AQ") # Read the triage Excel file
-        print(f"{file_path.name} loaded!")
+        print(f"{file_path.name} er lastet inn!")
     except FileNotFoundError:
         print(f"Kan ikke finne fil {file_path.name} i mappe: {file_path.parent}!")
     except PermissionError:
@@ -23,12 +25,12 @@ def hash_aliases_from_excel():
 
 
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table
-    vestfoldtriage_hashed_path = Path("../data/vestfoldtriage_data_hashed.pkl")
+    vestfoldtriage_hash_table_path = Path("../data/vestfoldtriage_data_hashed.pkl")
 
     # Uses Pathlib to check for hashed file in data dir, and creates an empty dictionary if it doesn't.
-    if vestfoldtriage_hashed_path.exists():
+    if vestfoldtriage_hash_table_path.exists():
         # Opening file in read mode as a binary stream in order to unpickle and read the file (for adding new entries). Built with help from the pickle docs.
-        with open(vestfoldtriage_hashed_path, "rb") as triage_data:
+        with open(vestfoldtriage_hash_table_path, "rb") as triage_data:
             vestfoldtriage_hash = pickle.load(triage_data)  # TODO: explain .load method
     else:
         vestfoldtriage_hash = {}
@@ -42,7 +44,7 @@ def hash_aliases_from_excel():
         vestfoldtriage_hash[npr_id] = f"pasient_{alias:05}"
 
     # Dumping the now aliased pickle file, opening again in write mode as binary stream. Dump = pickle
-    with open(vestfoldtriage_hashed_path, "wb") as triage_data:
+    with open(vestfoldtriage_hash_table_path, "wb") as triage_data:
         pickle.dump(vestfoldtriage_hash, triage_data)
 
     # checking for dupe, Initializing new column, applying update to dataframe
@@ -52,11 +54,11 @@ def hash_aliases_from_excel():
     df = df.drop('NPR ID', axis=1)
 
     # Save as Excel
-    print("Saving ID's ...")
+    print("Lagrer ID-nummer. Dette kan ta litt tid ...")
     df.to_excel("../data/vestfoldtriage_data_hashed.xlsx", index=False)
-    print(f"Success! Saved {len(new_alias_ids)} ID's.")
+    print(f"Suksess! Lagret {len(new_alias_ids)} ID-nummer.")
 
 # Main guard - A trick my developer friend taught me.. :)
 if __name__ == "__main__":
     hash_aliases_from_excel()
-    print("Process complete!")
+    print("Prosess fullført!")

@@ -1,19 +1,29 @@
 # FlytStat
-FlytStat (Flyttavle Statistics) is a dashboard comprised of statistics from the Emergency Room of a norwegian hospital<br>
+
+FlytStat (Flyttavle Statistics) is a lightweight tool comprised of statistics from the Emergency Room of a norwegian hospital<br>
 It serves as the final assignment (prosjektoppgave) for the USN PY1010 course.
 
 ## Purpose
-TBA
-## Background
-TBA
-## Progress requirements
-* [x] Arrays
-* [ ] Vector calculation
-* [x] If / Else comparators
-* [x] For- or While-loops
-* [x] Read and write data to file
-* [x] Plotting
-* [x] Custom functions
+
+The tool aims to serve as an [ETL pipeline](https://en.wikipedia.org/wiki/Extract,_transform,_load), extracting a raw datadump from the host software's statistics servers, transform them into a parseable,
+structured and dynamically accessible format, then load it into a graphical presentation.
+
+FlytStat is run as a CLI tool, and the current version is an **MVP**, but feature-complete for the scope of the assignment.
+
+## Installation:
+### 1. Clone Repository and 'CD' in
+```py
+git clone https://github.com/DotWallop/FlytStat.git
+cd FlytStat
+```
+
+### 2. Install required packages
+```py
+pip install -r requirements.txt
+```
+
+### 3. Run `main.py`
+
 
 ## Feature summary:
 <details>
@@ -46,7 +56,6 @@ TBA
   
   For a file this large, I would for a production project always have gone with a CSV file (or in reality, a database, even a lightweight one like SQLite) to give better options.
   I have some experience with SQLite, but as that is outside the scope of PY1010, I chose not to include it.
-
 </details>
 ---
 
@@ -59,24 +68,42 @@ TBA
 I learned a lot of things throughout this project. I have summarized them for myself, and for whomever is reading this.
 <details>
   <summary>Follow established best practice!</summary>
-  Stick to best practice. Proactively using DRY, YAGNI and others that I've probably not heard about yet goes a long way.
 
+  Stick to best practice. Proactively using DRY, YAGNI and others that I've probably not heard about yet goes a long way.
+</details>
+
+<details>
+  <summary>Think out an OOP structure from the get-go</summary>
+
+  I started out using a functional structure. As the project grew, I realized how cluttered it had become.
+
+  At that point, I did not have time to refactor everything. Depending on when you are grading it, and if I want to take on the task, I might have a separate OOP-branch.
 </details>
 
 <details>
   <summary>Narrow file scope</summary>
-  Circular import issues, not being able to find the function you want etc... Keep global settings to a global file.
+
+  Circular import issues, not being able to find the function you want etc... Keep global settings to a global file, import only what you need, where you need it.
 </details>
 
 <details>
   <summary>Function before looks!</summary>
+
   It's **super** easy to get carried away exploring how to make the program prettier. I spent a bit too much time fiddling around with
   visual libraries and originally implemented the Rich library with Loguru for pretty-print and rich console output. However this added complexity,
   And gave errors I did not know how to fix. Thus, I made the decision to remove them. Rookie mistake!
 </details>
 
 <details>
+  <summary>Main guarding is a lifesaver!!</summary>
+
+  A developer friend of mine taught me about the `if __name__ == "__main__"` - also called main guarding - function.
+  This is absolutely crucial for making sure you don't load the whole files from import. Amongst other things I use it to not load the dataframe more than once.
+</details>
+
+<details>
   <summary>(Hot take) - PEP8 is a cult manual</summary>
+
   Ok, maybe not __THAT__ bad 😁, but ...
   After taking the time to read through the entirety of PEP8, I realize that a lot of it resembles OCD-fueled rambling.
   Don't get me wrong, PEP8 is very useful, but it is quite a fun read!

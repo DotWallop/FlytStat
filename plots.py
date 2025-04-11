@@ -75,6 +75,3 @@ def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in
 
 
 # pie_chart = build_symptom_pie_chart()
-# Line plot or similar - patients per hour per triage category (input: date)
-
-# TODO: Test out matplotlib's subplot feature to make multiple plots!

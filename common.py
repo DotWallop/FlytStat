@@ -1,6 +1,11 @@
 """
 Utility function file for common and global variables.
 """
+from pathlib import Path
+
+ROOT_PATH = Path.cwd() if __name__ == "__main__" else Path(__file__).resolve().parent # Gets working dir if ran from IDE, else full base path
+ORIGINAL_SHEET_PATH = ROOT_PATH / "data" / "sensitive" / "vestfoldtriage.xlsx"
+HASHED_SHEET_PATH = ROOT_PATH / "data" / "vestfoldtriage_data_hashed.xlsx"
 
 URGENCY_LEVELS = {"NotUrgent": 1,
                   "LessUrgent": 2,

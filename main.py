@@ -1,12 +1,21 @@
 """
 Main page, handles CLI choice logic
 """
+import data_processing
+from common import HASHED_SHEET_PATH
+from data_processing import load_data
 import pages.statistics_page as sub_stats
+import scripts.npr_hashing as hash_script
+
+df = data_processing.load_data()  # Lazy loads the dataframe.
 
 main_page_choices = ("Vis statistikk", "Vis datagrunnlag")  # List of function options  TODO: If time: patient search? List patient from ID etc.
 exit_option = len(main_page_choices) + 1  # Dynamically sets index for exit option
 print("*"*18 + "\n     FlytStat     \n" + "*"*18)
 
+if not HASHED_SHEET_PATH:
+    print("Finner ikke en gyldig krypteringsnøkkel.\nKjører førstegangsoppsett...")
+    hash_script.hash_aliases_from_excel()  # Runs the hashing script.
 while True:
     print("\nVelg ønsket funksjon:")
     print("—"*23)  # Horizontal seperator
