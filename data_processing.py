@@ -77,5 +77,5 @@ def load_data():
         else:
             print("Lagret fil!")
 
-        return df, SYMPTOM_COLUMNS  # Reads file so it can be stored in variable
+    return df, SYMPTOM_COLUMNS  # Reads file so it can be stored in variable
 

@@ -2,7 +2,6 @@
 This file handles most of the metrics in the application - variable setting and user input functions.
 """
 from common import URGENCY_LEVELS
-from data_processing import SYMPTOM_COLUMNS
 import re
 import pandas as pd
 
@@ -90,9 +89,9 @@ def get_triage_stats_per_unit(df, date, datetime_prop='date') -> dict:  # TODO: 
             triage_count_stats[level] = len(counter)
         return triage_count_stats
 
-def get_symptom_stats_by_date(df, date) -> dict:
+def get_symptom_stats_by_date(df, symptom_columns, date) -> dict:
     symptom_count = {}
-    for symptom in SYMPTOM_COLUMNS:
+    for symptom in symptom_columns:
         patients_per_day = df.loc[(df[symptom] == 'X') & (df['Ankomst'].dt.date == date.date())]
         symptom_count[symptom] = len(patients_per_day)
     sorted_symptom_count = dict(sorted(symptom_count.items(), key=lambda item: item[1], reverse=True))  # Helped build by plt docs
@@ -105,8 +104,8 @@ def convert_counts_to_relative_size(sorted_symptom_count: dict):
     relative_number_of_patients = {symptom: count / total_patients for symptom, count in sorted_symptom_count.items()}
     return relative_number_of_patients
 
-def get_relative_symptom_counts(df, date):
-    sorted_counts = get_symptom_stats_by_date(date)
+def get_relative_symptom_counts(df, symptom_colums, date):
+    sorted_counts = get_symptom_stats_by_date(df, symptom_colums, date)
     return convert_counts_to_relative_size(sorted_counts)
 
 

@@ -1,9 +1,9 @@
 """
 Note: I had some help figuring this logic out from a developer friend of mine.
 I researched the pickle-library and figured out the best solution I could come up with for this.
-I also came to the conclusion that the most secure thing was t o run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
+I also came to the conclusion that the most secure thing was to run this script locally and only update the aliased data, in order to never expose the NPR ID's (ref. readme glossary) publicly.
 """
-from common import ORIGINAL_SHEET_PATH
+from common import ORIGINAL_SHEET_PATH, ROOT_DIR, HASHED_SHEET_PATH
 import pickle
 from pathlib import Path
 
@@ -11,7 +11,6 @@ import pandas as pd
 
 def hash_aliases_from_excel():
     file_path = ORIGINAL_SHEET_PATH # Get file path
-    print(file_path)
 
     try:
         df = pd.read_excel(file_path, usecols="A:AQ") # Read the triage Excel file
@@ -25,13 +24,13 @@ def hash_aliases_from_excel():
 
 
     # Uses 'pathlib' method Path to conveniently store boolean response if there already is a mapping table
-    vestfoldtriage_hash_table_path = Path("../data/vestfoldtriage_data_hashed.pkl")
+    vestfoldtriage_hash_table_path = ROOT_DIR / "data" / "vestfoldtriage_data_hashed.pkl"
 
     # Uses Pathlib to check for hashed file in data dir, and creates an empty dictionary if it doesn't.
     if vestfoldtriage_hash_table_path.exists():
         # Opening file in read mode as a binary stream in order to unpickle and read the file (for adding new entries). Built with help from the pickle docs.
         with open(vestfoldtriage_hash_table_path, "rb") as triage_data:
-            vestfoldtriage_hash = pickle.load(triage_data)  # TODO: explain .load method
+            vestfoldtriage_hash = pickle.load(triage_data)
     else:
         vestfoldtriage_hash = {}
     # TODO: Burde jeg ha en sjekk for å se om alias_ids er tom (try/except)?
@@ -55,7 +54,7 @@ def hash_aliases_from_excel():
 
     # Save as Excel
     print("Lagrer ID-nummer. Dette kan ta litt tid ...")
-    df.to_excel("../data/vestfoldtriage_data_hashed.xlsx", index=False)
+    df.to_excel(HASHED_SHEET_PATH, index=False)
     print(f"Suksess! Lagret {len(new_alias_ids)} ID-nummer.")
 
 # Main guard - A trick my developer friend taught me.. :)

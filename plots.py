@@ -6,7 +6,6 @@ from data_processing import load_data
 import matplotlib.pyplot as plt
 import numpy as np
 
-df, SYMPTOM_COLUMNS = load_data()
 plt.style.use('ggplot')
 
 # Stacked bar chart per day TODO: Decide if the data definition belongs here, or in data_processing
@@ -16,6 +15,7 @@ def build_stacked_bar_triage_for_day():
     Prompts user for date input, then builds stacked bar chart for no. of patients admitted per hour for selected day.
     Built with help from matplotlib documentation
     """
+    df, _ = load_data()  # '_' discards variable that's not needed
     selected_date = user_date_prompt_to_timestamp()
     patient_triage_dict = get_triage_stats_per_unit(df,selected_date, 'hour')  # TODO: Make hour inherit from user input?
 
@@ -47,8 +47,9 @@ def build_stacked_bar_triage_for_day():
 # bar_chart = build_stacked_bar_triage_for_day()  # Run
 
 def build_symptom_pie_chart(threshold=0.05):  # Default threshold of 5%, used in grouping
+    df, SYMPTOM_COLUMNS = load_data()
     selected_date = user_date_prompt_to_timestamp()
-    relative_count_dict = get_relative_symptom_counts(df, selected_date)
+    relative_count_dict = get_relative_symptom_counts(df, SYMPTOM_COLUMNS,selected_date)
     # Grouping
     symptom_labels = []
     symptom_values = []
